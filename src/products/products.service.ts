@@ -148,4 +148,16 @@ export class ProductsService {
     // console.log(error);
     throw new InternalServerErrorException('Unexpected error, check server logs!')
   }
+
+  async deleteAllProduct() {
+    const query = this.productRepository.createQueryBuilder('product');
+     try {
+      return await query
+        .delete()
+        .where({})
+        .execute();
+     } catch (error) {
+      this.handleDBExceptions(error);
+     }
+  }
 }
